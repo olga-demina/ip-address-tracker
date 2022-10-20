@@ -1,0 +1,13 @@
+LA CHALLENGE DI KAROLINA.
+Qui ci sono principali indicazioni:
+
+***Che cosa deve essere fatto***
+1. Implementare l'app di IP Address coding come descritto qui: https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0
+2. Predisporre live demo della vostra implementazione (potete usare github pages, netlify ecc)
+
+***Condizioni*** 
+Per l'implementazione usare il framwork Vue (versione 2 o 3). Per la versione 3 si possono usare sia options API che composition API.
+
+***Procedimento***
+La challenge inizia il 20 ottobre e deve essere completata entro il 26 ottobre
+Il 27 ottobre (o altra data da accordare insieme) ci vediamo su zoom per mostrare e discutere i risultati. La call durerà circa un'ora. Discuteremo possibile struttura del progetto (componenti) e di quelle parti che hanno creato più difficoltà. 

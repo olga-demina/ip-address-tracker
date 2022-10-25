@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "leaflet": "^1.9.2",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
     "vue": "^3.2.38"

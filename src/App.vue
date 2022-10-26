@@ -6,22 +6,14 @@ import Searchbar from './components/Searchbar.vue';
 import IpInfoBlock from './components/LocationInfoBlock.vue';
 import LocationMap from './components/LocationMap.vue';
 
+import useFetch from './hooks/use-fetch';
+
 const env = import.meta.env;
 
 
 const state = reactive({
-  ip: "93.55.85.5",
-  // location: {},
-  location: {
-    city: "Simonetta",
-    country: "IT",
-    geonameId: 12022946,
-    lat: 45.4911,
-    lng: 9.16707,
-    postalCode: "",
-    region: "Lombardia",
-    timezone: "+02:00",
-  },
+  ip: "",
+  location: {},
   isp: "",
   map: ""
 });
@@ -31,30 +23,22 @@ const location = computed(() => {
 })
 
 onMounted(async () => {
-  console.log("mount");
   await getUserIp();
 });
 
 async function getUserIp() {
-  console.log("getting location");
   const params = {
     apiKey: env.VITE_GEO_IPFY_API_KEY,
     ipAddress: state.ip ? state.ip : ""
   }
-  const url = new URL("https://geo.ipify.org/api/v2/country,city");
-  for (let key in params) {
-    url.searchParams.append(key, params[key]);
-  }
-  const ipData = await (await fetch(url)).json();
-  console.log(ipData);
-  state.ip = ipData.ip;
-  state.location = ipData.location;
-  state.isp = ipData.isp;
-  console.log(state.location);
+  const {response, error, fetchData} = useFetch("https://geo.ipify.org/api/v2/country,city", params);
+  await fetchData();
+  state.ip = response.value.ip;
+  state.location = response.value.location;
+  state.isp = response.value.isp;
 }
 
 async function changeIp(newIp) {
-  console.log("changeIp", newIp);
   state.ip = newIp
   await getUserIp();
 }
@@ -75,6 +59,8 @@ async function changeIp(newIp) {
 
 header {
   background-image: url("@/assets/images/pattern-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
   padding: 2.5rem; 
   position: relative;
   height: var(--header-height);

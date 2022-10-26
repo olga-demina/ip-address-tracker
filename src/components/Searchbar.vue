@@ -14,11 +14,44 @@ function startSearch() {
 </script>
 
 <template>
-    <div>
+    <div class="search-box">
         <input @keyup.enter="startSearch" type="text" v-model="ipToSearch">
-        <button @click="startSearch">></button>
+        <button @click="startSearch">&rsaquo;</button>
     </div>
 </template>
 
-<style lang="scss" setup>
+<style scoped>
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.search-box input {
+    color: var(--very-dark-gray);
+    font-size: 1.8rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px 0 0 10px;
+    border: 0;
+}
+
+.search-box input:focus-visible {
+    outline: 0;
+    border: 1px solid var(--dark-gray);
+}
+
+.search-box button {
+    border: 0;
+    font-size: 2rem;
+    padding: .8rem 1.5rem;
+    border-radius: 0 10px 10px 0;
+    color: white;
+    background-color: var(--very-dark-gray);
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+.search-box button:hover {
+    background-color: var(--dark-gray);
+}
 </style>

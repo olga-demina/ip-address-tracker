@@ -25,7 +25,7 @@ function initMap() {
 
 function setMapLocation() {
     console.log("setting map location");
-    if(map.value) {
+    if (map.value) {
         map.value.setView([props.lat, props.lng], 13);
         L.marker([props.lat, props.lng]).addTo(map.value);
     }
@@ -36,6 +36,8 @@ function setMapLocation() {
     <div id="map"></div>
 </template>
 
-<style lang="scss" scoped>
-
+<style scoped>
+#map {
+    height: 100%;
+}
 </style>

@@ -12,18 +12,29 @@ const env = import.meta.env;
 
 
 const state = reactive({
-  ip: "",
-  location: {},
-  isp: "",
-  map: ""
+  // ip: "",
+  // location: {},
+  // isp: "",
+  ip: "93.55.85.5",
+  isp: "Fastweb SpA",
+  location: {
+    city: "Simonetta",
+    country: "IT",
+    geonameId: 12022946,
+    lat: 45.4911,
+    lng: 9.16707,
+    postalCode: "",
+    region: "Lombardia",
+    timezone: "+02:00",
+  }
 });
 
-const location = computed(() => {
+const locationTxt = computed(() => {
   return `${state.location.city}, ${state.location.region} ${state.location.postalCode}`;
 })
 
 onMounted(async () => {
-  await getUserIp();
+  // await getUserIp();
 });
 
 async function getUserIp() {
@@ -31,7 +42,7 @@ async function getUserIp() {
     apiKey: env.VITE_GEO_IPFY_API_KEY,
     ipAddress: state.ip ? state.ip : ""
   }
-  const {response, error, fetchData} = useFetch("https://geo.ipify.org/api/v2/country,city", params);
+  const { response, error, fetchData } = useFetch("https://geo.ipify.org/api/v2/country,city", params);
   await fetchData();
   state.ip = response.value.ip;
   state.location = response.value.location;
@@ -48,7 +59,7 @@ async function changeIp(newIp) {
   <header>
     <h1>IP Address Tracker</h1>
     <Searchbar :userIp="state.ip" @search="changeIp" />
-    <IpInfoBlock :ipAddress="state.ip" :location="location" :timezone="state.location.timezone" :isp="state.isp" />
+    <IpInfoBlock :ipAddress="state.ip" :location="locationTxt" :timezone="state.location.timezone" :isp="state.isp" />
   </header>
   <section class="map-section">
     <LocationMap v-if="state.location.lat && state.location.lng" :lat="state.location.lat" :lng="state.location.lng" />
@@ -56,25 +67,23 @@ async function changeIp(newIp) {
 </template>
 
 <style scoped>
-
 header {
   background-image: url("@/assets/images/pattern-bg.png");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 2.5rem; 
+  padding: 2.5rem;
   position: relative;
   height: var(--header-height);
 }
 
 header h1 {
-  color: white; 
+  color: white;
   font-size: 3.2rem;
   text-align: center;
-  margin-bottom: .8em; 
+  margin-bottom: .8em;
 }
 
 .map-section {
   height: calc(100vh - var(--header-height));
 }
-
 </style>

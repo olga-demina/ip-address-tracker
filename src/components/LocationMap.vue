@@ -27,10 +27,8 @@ function setMapLocation() {
     console.log("setting map location");
     if (map.value) {
         map.value.setView([props.lat, props.lng], 13);
-        L.marker([props.lat, props.lng]).addTo(map.value);
-
         const myIcon = L.icon({
-            iconUrl: 'assets/images/icon-location.svg',
+            iconUrl: '/src/assets/images/icon-location.svg',
         });
         L.marker([props.lat, props.lng], { icon: myIcon }).addTo(map.value);
     }

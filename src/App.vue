@@ -12,30 +12,31 @@ const env = import.meta.env;
 
 
 const state = reactive({
-  ip: "",
-  location: {
-    city: "",
-    country: "",
-    geonameId: "",
-    lat: 0,
-    lng: 0,
-    postalCode: "",
-    region: "",
-    timezone: "",
-  },
-  isp: "",
-  // ip: "93.55.85.5",
-  // isp: "Fastweb SpA",
+  // ip: "",
   // location: {
-  //   city: "Simonetta",
-  //   country: "IT",
-  //   geonameId: 12022946,
-  //   lat: 45.4911,
-  //   lng: 9.16707,
+  //   city: "",
+  //   country: "",
+  //   geonameId: "",
+  //   lat: 0,
+  //   lng: 0,
   //   postalCode: "",
-  //   region: "Lombardia",
-  //   timezone: "+02:00",
-  // }
+  //   region: "",
+  //   timezone: "",
+  // },
+  // isp: "",
+  // TEST
+  ip: "93.55.85.5",
+  isp: "Fastweb SpA",
+  location: {
+    city: "Simonetta",
+    country: "IT",
+    geonameId: 12022946,
+    lat: 45.4911,
+    lng: 9.16707,
+    postalCode: "",
+    region: "Lombardia",
+    timezone: "+02:00",
+  }
 });
 
 const locationTxt = computed(() => {
@@ -43,7 +44,7 @@ const locationTxt = computed(() => {
 })
 
 onMounted(async () => {
-  await getUserIp();
+  // await getUserIp();
 });
 
 async function getUserIp() {

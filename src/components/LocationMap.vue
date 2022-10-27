@@ -30,7 +30,7 @@ function setMapLocation() {
         L.marker([props.lat, props.lng]).addTo(map.value);
 
         const myIcon = L.icon({
-            iconUrl: 'src/assets/images/icon-location.svg',
+            iconUrl: 'assets/images/icon-location.svg',
         });
         L.marker([props.lat, props.lng], { icon: myIcon }).addTo(map.value);
     }

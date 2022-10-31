@@ -2,20 +2,27 @@
 import { ref } from 'vue';
 
 const props = defineProps(["userIp"]);
-
 const ipToSearch = ref(props.userIp);
-
 const emit = defineEmits(["search"]);
 
 function startSearch() {
-    emit('search', ipToSearch.value.trim());
+    const isIp = validateIpAddress(ipToSearch.value.trim());
+    emit('search', {"needle": ipToSearch.value.trim(), isIp});
 }
+
+function validateIpAddress(value) {
+    if(/^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/.test(value)) {
+        return true;
+    }
+    return false;
+}
+
 
 </script>
 
 <template>
     <div class="search-box">
-        <input @keyup.enter="startSearch" type="text" v-model="ipToSearch">
+        <input @keyup.enter="startSearch" type="text" v-model="ipToSearch" placeholder="Search for any IP address or domain">
         <button @click="startSearch">&rsaquo;</button>
     </div>
 </template>
@@ -33,6 +40,7 @@ function startSearch() {
     padding: 1rem 1.5rem;
     border-radius: 10px 0 0 10px;
     border: 0;
+    min-width: 30%;
 }
 
 .search-box input:focus-visible {

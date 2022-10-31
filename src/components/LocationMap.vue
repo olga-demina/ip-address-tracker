@@ -24,7 +24,6 @@ function initMap() {
 }
 
 function setMapLocation() {
-    console.log("setting map location");
     if (map.value) {
         map.value.setView([props.lat, props.lng], 13);
         const myIcon = L.icon({

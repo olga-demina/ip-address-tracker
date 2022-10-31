@@ -13,6 +13,7 @@ const env = import.meta.env;
 
 const state = reactive({
   ip: "",
+  domain: null,
   location: {
     city: "",
     country: "",
@@ -37,7 +38,8 @@ onMounted(async () => {
 async function getUserIp() {
   const params = {
     apiKey: env.VITE_GEO_IPFY_API_KEY,
-    ipAddress: state.ip ? state.ip : ""
+    ipAddress: state.ip ? state.ip : "",
+    ...(state.domain && { domain: state.domain })
   }
   const { response, error, fetchData } = useFetch("https://geo.ipify.org/api/v2/country,city", params);
   await fetchData();
@@ -46,8 +48,14 @@ async function getUserIp() {
   state.isp = response.value.isp;
 }
 
-async function changeIp(newIp) {
-  state.ip = newIp
+async function changeIp({ needle, isIp }) {
+  if (isIp) {
+    state.ip = needle;
+    state.domain = null
+  } else {
+    state.ip = "";
+    state.domain = needle;
+  }
   await getUserIp();
 }
 </script>
